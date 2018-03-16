@@ -1,0 +1,150 @@
+var gameTurn = 1;
+var health = 100;
+var inventory = "";
+var message1 = "";
+var message2 = "";
+var option1Text = "";
+var option2Text = "";
+var choseOption1 = false;
+var choseOption2 = false;
+var startOfTurn = true;
+var wastedTime = 0;
+//achievement list?
+
+var numSwigsLeft = 3;
+var lookingForWeapon = false;
+action();
+
+function action() {
+  
+if (gameTurn == 1 && startOfTurn) {
+  inventory = "Can of Beer";
+  message1 = "It's a Saturday afternoon. As usual, you are watching the football game with your feet propped on a footstool.";
+  message2 = "You're holding a Can of Beer. It is half-empty.";
+  option1Text = "Take a Swig";
+  option2Text = "Check the News";
+} else if (gameTurn == 1 && !startOfTurn) {
+  message1 = "You take a swig of beer.";
+  message2 = "You can almost feel your health and state of mind deteriorating with every swig."
+  option1Text = "Take Another Swig";
+} else if (gameTurn == 2 && numSwigsLeft == 0 && startOfTurn) {
+  inventory = "Empty Can of Beer";
+  message1 = "You chug the last of the beer and let out a mighty burp. Satisfied, you decide to change the channel to the local news.";
+  message2 = "To your surprise, the newcaster says that zombies are running loose in the streets of your town.";
+  option1Text = "Take a Look Outside";
+  option2Text = "Change the Channel Back to Football";
+} else if (gameTurn == 2 && startOfTurn) {
+  message1 = "During a commercial break, you decide to change the channel to the local news.";
+  message2 = "To your surprise, the newscaster says that zombies are running loose in the streets of your town.";
+  option1Text = "Take a Look Outside";
+  option2Text = "Change the Channel Back to Football";
+} else if (gameTurn == 3) {
+  option1Text = "See Who it Is";
+  option2Text = "Look for a Weapon";
+} else if (gameTurn == 4) {
+  inventory = "";
+} else if (gameTurn == 5 && lookingForWeapon) {
+  message1 = "Feeling safer now, you cautiously walk over to the front door and peer through the peephole. You see your neighbor, Jim, visibly agitated at having to wait so long.";
+  message2 = "You notice a zombie lurching right behind him."
+  option1Text = "Behind you!";
+  option2Text = "Jim, look out!";
+} else if (gameTurn == 6 && lookingForWeapon) {
+  message1 = "Before you can say anything, the zombie leaps with incredible agility and buries its teeth into Jim's neck.";
+  message2 = "Oops. Perhaps, you could have saved him if you didn't waste any time. So, what now?";
+  option1Text = "oh";
+  option2Text = "snap";
+}
+  document.getElementById('health').innerHTML = health;
+  document.getElementById('inventory').innerHTML = inventory;
+  document.getElementById('message1').innerHTML = message1;
+  document.getElementById('message2').innerHTML = message2;
+  document.getElementById('option1Text').innerHTML = option1Text;
+  document.getElementById('option2Text').innerHTML = option2Text;
+} // action()
+function option1() {
+  if (gameTurn == 1) {
+    startOfTurn = false;
+    numSwigsLeft--;
+    health -= 5;
+    if (numSwigsLeft == 0) {
+      gameTurn = 2;
+      startOfTurn = true;
+    }
+  } else if (gameTurn == 2) {
+    gameTurn = 3;
+    message1 = "Peering out your window, you unmistakably see several zombies lumbering about. Huh, the news was right after all.";
+    message2 = "You then hear frantic banging on your front door.";
+  } else if (gameTurn == 3) {
+    gameTurn = 4;
+    message1 = "You walk over and look through the peephole.";
+    message2 = "It's your neighbor, Jim.";
+    option1Text = "Hey, Jim";
+    option2Text = "What's up, Jim";
+  } else if (gameTurn == 4 && lookingForWeapon) {
+    gameTurn = 5;
+    inventory = "Wooden Bat";
+  } else if (gameTurn == 4) {
+    gameTurn = 5;
+    inventory = "";
+    message1 = "Very funny. You mind helping me out here??";
+    message2 = "If you haven't noticed, we're in the middle of a freakin' zombie apocalypse!";
+    option1Text = "Eh, Fine";
+    option2Text = "Don't You Still Owe me Those Five Bucks?";
+  } else if (gameTurn == 5 && lookingForWeapon) {
+    gameTurn = 6;
+  } else if (gameTurn == 5) {
+    gameTurn = 6;
+    message1 = "You casually open the door. Jim walks in with a sigh of relief."
+    message2 = "So what now?";
+    option1Text = "Look for Other Survivors";
+    option2Text = "Die";
+  }
+  action();
+}
+
+function option2() {
+  if (gameTurn == 1) {
+    startOfTurn = true;
+    gameTurn = 2;
+  } else if (gameTurn == 2) {
+    gameTurn = 3;
+    message1 = "You shake your head and go back to the sports channel. Your grandmother had always told you that the news was brainwashing you.";
+    message2 = "You then hear frantic banging at your front door.";
+  } else if (gameTurn == 3) {
+    lookingForWeapon = true;
+    gameTurn = 4;
+    message1 = "You quickly scan the room for something to defend yourself with.";
+    message2 = "You notice a wooden baseball bat and some nunchucks.";
+    option1Text = "Take the Bat";
+    option2Text = "Take the Nunchucks";
+  } else if (gameTurn == 4 && lookingForWeapon) {
+    gameTurn = 5;
+    inventory = "Nunchucks";
+  } else if (gameTurn == 4) {
+    gameTurn = 5;
+    message1 = "Very funny. You mind helping me out here??";
+    message2 = "If you haven't noticed, we're in the middle of a freakin' zombie apocalypse!";
+    option1Text = "Eh, Fine";
+    option2Text = "Don't you Still Owe me Those Five Bucks?";
+  } else if (gameTurn == 5 && lookingForWeapon) {
+    gameTurn = 6;
+  }
+  action();
+}
+
+function startOver() {
+  gameTurn = 1;
+  health = 100;
+  inventory = "";
+  message1 = "";
+  message2 = "";
+  option1Text = "";
+  option2Text = "";
+  choseOption1 = false;
+  choseOption2 = false
+  startOfTurn = true;
+  wastedTime = 0;
+  numSwigsLeft = 3;
+  lookingForWeapon = false;
+  action();
+}

@@ -1,0 +1,31 @@
+<html>
+  
+<head>
+  <h1>Escape</h1>
+</head>
+  
+<body>
+  <p>
+    <b>Health</b>
+    <br /> <span id="health">100</span>
+  </p>
+  <p>
+    <b>Inventory</b>
+    <br /> <span id="inventory"></span>
+  </p>
+  <br />
+  <p>
+    <span id="message1"></span>
+  </p>
+  <p>
+    <span id="message2"></span>
+  </p>
+    <button onclick="option1()"><span id= "option1Text"></span>
+    <button onclick="option2()"><span id= "option2Text"></span>
+    <button onclick="startOver()">Start Over<span id= "startOver"></span>
+  
+<script type="text/javascript" src="main.js">
+</script>
+</body>
+    
+</html>
